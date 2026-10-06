@@ -48,10 +48,10 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(
+        configuration.setAllowedOriginPatterns(
                 List.of(
                         "http://localhost:5173",
-                        "https://elearning-frontend-murex-five.vercel.app"
+                        "https://*.vercel.app"
                 )
         );
 
