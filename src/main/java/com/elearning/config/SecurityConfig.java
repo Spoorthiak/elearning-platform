@@ -49,10 +49,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOriginPatterns(
-                List.of(
-                        "http://localhost:5173",
-                        "https://*.vercel.app"
-                )
+                List.of("*")
         );
 
         configuration.setAllowedMethods(
@@ -73,7 +70,7 @@ public class SecurityConfig {
                 List.of("Authorization")
         );
 
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(false);
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
