@@ -1,31 +1,24 @@
-# E-Learning Platform
+## Deployment
 
-A full-stack e-learning platform built using React, Spring Boot, Spring Security, JWT authentication, and MySQL-compatible TiDB Cloud.
+- **Frontend:** https://elearning-frontend-murex-five.vercel.app/login
+- **Backend:** https://elearning-platform-cr7r.onrender.com
 
-## Live Demo
+## Backend Technology Stack
 
-🌐 **Live Website:** https://elearning-frontend-murex-five.vercel.app/login
+- Java 21
+- Spring Boot
+- Spring Security and JWT Authentication
+- Maven
+- TiDB Cloud (MySQL-compatible database)
+- Docker
+- Render
 
-## Features
+## Key Features
 
-- Student, Trainer, and Admin roles
-- User registration and login with JWT authentication
-- Course creation and management
-- Lessons with YouTube videos
-- Course enrollment and Razorpay test payments
+- User registration and login
+- Role-based access for Students, Trainers, and Admins
+- Course and lesson management
+- YouTube video lessons
+- Enrollment and Razorpay test payments
 - Lesson progress tracking
-- Course discussions and comments
-
-## Tech Stack
-
-**Frontend:** React, Vite
-
-**Backend:** Java, Spring Boot, Spring Security, JWT
-
-**Database:** TiDB Cloud (MySQL compatible)
-
-**Deployment:** Vercel, Render
-
-## Note
-
-Razorpay is configured for test payments. Do not use real payment details.
+- Course comments and discussions
