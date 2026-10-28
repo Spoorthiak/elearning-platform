@@ -1,3 +1,4 @@
+
 package com.elearning.config;
 
 import java.util.List;
@@ -33,7 +34,6 @@ public class SecurityConfig {
     public SecurityConfig(
             CustomUserDetailsService userDetailsService,
             JwtAuthenticationFilter jwtAuthenticationFilter) {
-
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
@@ -48,29 +48,26 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOriginPatterns(
-                List.of("*")
+        configuration.setAllowedOrigins(
+                List.of(
+                    "https://elearning-frontend-murex-five.vercel.app"
+                )
         );
 
         configuration.setAllowedMethods(
                 List.of(
-                        "GET",
-                        "POST",
-                        "PUT",
-                        "DELETE",
-                        "OPTIONS"
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "DELETE",
+                    "OPTIONS"
                 )
         );
 
-        configuration.setAllowedHeaders(
-                List.of("*")
-        );
-
-        configuration.setExposedHeaders(
-                List.of("Authorization")
-        );
-
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setExposedHeaders(List.of("Authorization"));
         configuration.setAllowCredentials(false);
+        configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
@@ -84,7 +81,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration configuration)
             throws Exception {
-
         return configuration.getAuthenticationManager();
     }
 
@@ -105,34 +101,28 @@ public class SecurityConfig {
 
         http
             .csrf(csrf -> csrf.disable())
-
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-
+            .cors(cors ->
+                cors.configurationSource(corsConfigurationSource())
+            )
             .httpBasic(httpBasic -> httpBasic.disable())
-
             .formLogin(formLogin -> formLogin.disable())
-
             .sessionManagement(session ->
                 session.sessionCreationPolicy(
                     SessionCreationPolicy.STATELESS
                 )
             )
-
             .authorizeHttpRequests(auth -> auth
+
+                .requestMatchers(HttpMethod.OPTIONS, "/**")
+                .permitAll()
 
                 .requestMatchers("/api/auth/**")
                 .permitAll()
 
-                .requestMatchers(
-                    HttpMethod.POST,
-                    "/api/courses"
-                )
+                .requestMatchers(HttpMethod.POST, "/api/courses")
                 .hasRole("TRAINER")
 
-                .requestMatchers(
-                    HttpMethod.PUT,
-                    "/api/courses/*"
-                )
+                .requestMatchers(HttpMethod.PUT, "/api/courses/*")
                 .hasRole("TRAINER")
 
                 .requestMatchers(
@@ -228,7 +218,6 @@ public class SecurityConfig {
                 .anyRequest()
                 .authenticated()
             )
-
             .addFilterBefore(
                 jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class
